@@ -1,22 +1,24 @@
 use Selenium::Remote::Driver;
 use Selenium::ActionChains;
 use utf8::all;
-use MIME::Base64 qw( encode_base64 decode_base64);
+#use MIME::Base64 qw( encode_base64 decode_base64);
 use Data::Printer;
  
 my $driver = Selenium::Remote::Driver->new;
-$driver->is_webdriver3 ;
+#$driver->is_webdriver3 ;
 my $action_chains = Selenium::ActionChains->new(driver => $driver);
 
-=pod
+
 $driver->get("http://www.tonow.cn/office");
+my $elt_0 = $driver->find_element("//li[\@id='tab1']");
+print $elt_0->get_text,"\n";
 my $elt_1 = $driver->find_element("//*[\@id='username']");
 my $elt_2 = $driver->find_element("//*[\@id='password1']");
 my $img_64 = $driver->find_element("//img[\@title='没有看清？点击换一个...']");
 $img_64->capture_screenshot('./code.jpg');
 my $elt_3 = $driver->find_element("//input[\@id='getcode']");
 $action_chains->send_keys_to_element($elt_1,'曾理')->send_keys_to_element($elt_2,'123456')->click($elt_3)->perform;
-$driver->pause(5000);
+$driver->pause(15000);
 #my $msg = $driver->get_text("//*[\@id='showMsg']");
 
 #print "$msg\n";
@@ -35,5 +37,5 @@ if  ( my $cookie = $driver->get_cookie_named('GGPT') ) {
 }
 #p $cookie;
 #$driver->close;
-=cut
+
 
